@@ -3,12 +3,45 @@ server:
 spring:
   application:
     name: api-gateway  #指定服务名
+
+#******************* zuul 路由的第一种配置方式 *******************#
+#zuul:
+#  routes:
+#    user-service: # 这里是路由id，随意写.我们将 /user-service/**开头的请求，代理到http://127.0.0.1:8081
+#      path: /user-service/** # 这里是映射路径
+#      # url: http://127.0.0.1:8081 # 映射路径对应的实际url地址
+#******************* zuul 路由的第一种配置方式 *******************#
+
+#******************* zuul 路由的第2种配置方式 *******************#
+#zuul:
+#  routes:
+#    user-service: # 这里是路由id，随意写.我们将 /user-service/**开头的请求，代理到http://127.0.0.1:8081
+#      path: /user-service/** # 这里是映射路径
+#      serviceId: user-service # 指定服务名称
+#******************* zuul 路由的第一种配置方式 *******************#
+
+#******************* zuul 路由的第3种配置方式 *******************#
+#zuul:
+#  routes:
+#    user-service: /user-service/** # 这里是映射路径 (简化的路由配置)
+#******************* zuul 路由的第3种配置方式 *******************#
+
+#******************* zuul 路由的第4种配置方式 *******************#
+# 你没看错，映射规则我们完全不配置也是OK的，不信就试试看
+# 因为Zuul指定了默认的路由规则,默认情况下，一切服务的映射路径就是服务名本身
+#******************* zuul 路由的第4种配置方式 *******************#
+
+#******************* zuul 路由前缀 *******************#
+# 在发起请求时，路径就要以/api开头
+# 路径 /api/user-service/user/1 将会被代理到 /user-service/user/1
 zuul:
+  prefix: /api # 添加路由前缀
   routes:
-    user-service: # 这里是路由id，随意写.我们将 /user-service/**开头的请求，代理到http://127.0.0.1:8081
+    user-service: # 这里是路由id，随意写
       path: /user-service/** # 这里是映射路径
-      serviceId: user-service # 指定服务名称
-      # url: http://127.0.0.1:8081 # 映射路径对应的实际url地址
+      service-id: user-service # 指定服务名称
+#******************* zuul 路由前缀 *******************#
+
 eureka:
   client:
     registry-fetch-interval-seconds: 5 # 获取服务列表的周期：5s
