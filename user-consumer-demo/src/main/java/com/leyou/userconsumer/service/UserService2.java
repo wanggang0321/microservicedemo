@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class UserService2 {
 
-    @Autowired
+    //@Autowired
     private RestTemplate restTemplate;
 
     @Autowired

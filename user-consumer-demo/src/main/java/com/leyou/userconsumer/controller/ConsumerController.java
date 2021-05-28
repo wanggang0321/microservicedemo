@@ -1,10 +1,7 @@
 package com.leyou.userconsumer.controller;
 
 import com.leyou.userconsumer.pojo.User;
-import com.leyou.userconsumer.service.UserService;
-import com.leyou.userconsumer.service.UserService2;
-import com.leyou.userconsumer.service.UserService2Ribbon;
-import com.leyou.userconsumer.service.UserService3Hystrix;
+import com.leyou.userconsumer.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +22,8 @@ public class ConsumerController {
     private UserService3Hystrix userService3;
     @Autowired
     private UserService2Ribbon userService2Ribbon;
+    @Autowired
+    private UserService5Feign userService5Feign;
 
     /**
      * 简单调用
@@ -64,6 +63,16 @@ public class ConsumerController {
     @GetMapping("/4")
     public List<User> consume4(@RequestParam("ids") List<Long> ids) {
         return userService2Ribbon.queryUserByIds(ids);
+    }
+
+    /**
+     * Feign调用
+     * @param ids
+     * @return
+     */
+    @GetMapping("/5")
+    public List<User> consume5(@RequestParam("ids") List<Long> ids) {
+        return userService5Feign.queryUserByIds(ids);
     }
 
 }

@@ -22,12 +22,25 @@ user-service:
     OkToRetryOnAllOperations: true # 是否对所有操作都进行重试
     MaxAutoRetriesNextServer: 1 # 切换实例的重试次数
     MaxAutoRetries: 1 # 对当前实例的重试次数
-hystrix:
-  command:
-    default:
-      execution:
-        timeout:
-          enabled: true # 开启熔断
-        isolation:
-          thread:
-            timeoutInMillisecond: 6000 # 设置hystrix的超时时间为6000ms
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        timeout:
+#          enabled: true # 开启熔断
+#        isolation:
+#          thread:
+#            timeoutInMillisecond: 6000 # 设置hystrix的超时时间为6000ms
+feign:
+  compression:
+    request:
+      enabled: true # 开启请求压缩
+      mime-types: text/html,application/xml,application/json # 设置压缩的数据类型
+      min-request-size: 2048 # 设置触发压缩的大小下限
+    response:
+      enabled: true # 开启响应压缩
+  hystrix:
+    enabled: true # 开启Feign的熔断功能
+logging:
+  level:
+    com.leyou: debug

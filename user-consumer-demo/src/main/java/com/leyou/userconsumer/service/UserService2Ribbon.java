@@ -1,7 +1,6 @@
 package com.leyou.userconsumer.service;
 
 import com.leyou.userconsumer.pojo.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,7 +15,7 @@ import java.util.List;
 @Service
 public class UserService2Ribbon {
 
-    @Autowired
+    //@Autowired
     private RestTemplate restTemplate;
 
     public List<User> queryUserByIds(List<Long> ids) {

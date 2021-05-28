@@ -1,14 +1,13 @@
 package com.leyou.userconsumer.dao;
 
 import com.leyou.userconsumer.pojo.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @Component
 public class UserDao {
 
-    @Autowired
+    //@Autowired
     private RestTemplate restTemplate;
 
     public User queryUserById(Long id) {
